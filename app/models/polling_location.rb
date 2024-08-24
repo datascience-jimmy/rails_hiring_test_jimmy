@@ -2,11 +2,15 @@ class PollingLocation < ApplicationRecord
   belongs_to :riding
   has_many :polls
 
-  validates :title, presence: true
-  validates :address, presence: true
-  validates :city, presence: true
-  validates :postal_code, presence: true
-  validate :validate_postal_code
+  validates :title, :address, :city, :postal_code, presence: true
+  # validates :address, presence: true
+  # validates :city, presence: true
+  # validates :postal_code, presence: true
+  # validate :validate_postal_code
+  validates :title, uniqueness: {
+    scope: [:address, :city, :postal_code],
+    message: "A polling location with this combination of title, address, city, and postal code already exists."
+  }
   
   after_validation :format_postal_code
 

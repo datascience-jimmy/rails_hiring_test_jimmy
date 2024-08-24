@@ -5,4 +5,8 @@
 import { application } from "./application"
 
 import HelloController from "./hello_controller"
+import PollingLocationController from "./polling_location_controller"
+
+
 application.register("hello", HelloController)
+application.register("edit-polling-location", PollingLocationController)
