@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_19_215251) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_25_020520) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -23,6 +23,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_19_215251) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["riding_id"], name: "index_polling_locations_on_riding_id"
+    t.index ["title", "address", "city", "postal_code"], name: "index_polling_locations_on_details", unique: true
   end
 
   create_table "polls", force: :cascade do |t|
@@ -31,6 +32,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_19_215251) do
     t.bigint "polling_location_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["number", "riding_id"], name: "index_polls_on_number_and_riding_id", unique: true
     t.index ["polling_location_id"], name: "index_polls_on_polling_location_id"
     t.index ["riding_id"], name: "index_polls_on_riding_id"
   end
